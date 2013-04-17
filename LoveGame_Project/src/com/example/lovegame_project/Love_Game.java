@@ -2,8 +2,12 @@ package com.example.lovegame_project;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +32,10 @@ public class Love_Game extends Activity {
 		
 		 try 
 	     {
+				requestWindowFeature(Window.FEATURE_NO_TITLE);
+				getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+		                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			 setContentView(R.layout.activity_love__game);
 	      
 	            

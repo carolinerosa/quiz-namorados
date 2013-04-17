@@ -5,16 +5,23 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.*;
+import android.content.pm.ActivityInfo;
 
 public class Menu_main extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_menumain);
 		Button	btcomecar = (Button)findViewById (R.id.bt_comecar);
 		Button btinstrucoes = (Button)findViewById (R.id.bt_comecar);
