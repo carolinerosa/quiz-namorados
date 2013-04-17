@@ -26,9 +26,7 @@ public class Menu_main extends Activity {
 			@Override
 			public void onClick(View v) {
 				try{
-				Intent trocatela = new Intent(Menu_main.this,Love_Game.class);
-				Menu_main.this.startActivity(trocatela);
-				Menu_main.this.finish();
+				ChangeLayout cl = new ChangeLayout(Menu_main.this,Love_Game.class);
 				}catch(Exception e)
 				{
 					Mensagem("erro"+e.getMessage());
