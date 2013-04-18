@@ -28,6 +28,7 @@ public class Love_Game extends Activity {
 	private Spinner SpnListarArquivos;
 	private ArrayList<String> Arquivos = new ArrayList<String>();
 	static Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,30 +91,34 @@ public class Love_Game extends Activity {
 	}
 	public void click_Salvar(View v)
 	{
+		SalvarPergunta();
+	}
+	void SalvarPergunta()
+	{
 		//pega o texto criado, e o diretorio(file),pega os bytes do texto e manda usando o FileOutputStream, dando o diretório e o byte a ser enviado.
-		String lstrNomeArq;
-	     File arq;
-	     byte[] dados;
-	      try
-	      {
-	          lstrNomeArq = txtNomeArq.getText().toString();
-	             
-	arq = new File(Environment.getExternalStorageDirectory(), lstrNomeArq);
-	          FileOutputStream fos;
-	             
-	dados = txtSalvar.getText().toString().getBytes();
-	             
-	          fos = new FileOutputStream(arq);
-	          fos.write(dados);
-	          fos.flush();
-	          fos.close();
-	          Mensagem("Texto Salvo com sucesso!");
-	          Listar();
-	      } 
-	      catch (Exception e) 
-	      {
-	        Mensagem("Erro : " + e.getMessage());
-	      }     
+				String lstrNomeArq;
+			     File arq;
+			     byte[] dados;
+			      try
+			      {
+			          lstrNomeArq = txtNomeArq.getText().toString();
+			             
+			arq = new File(Environment.getExternalStorageDirectory(), lstrNomeArq);
+			          FileOutputStream fos;
+			             
+			dados = txtSalvar.getText().toString().getBytes();
+			             
+			          fos = new FileOutputStream(arq);
+			          fos.write(dados);
+			          fos.flush();
+			          fos.close();
+			          Mensagem("Texto Salvo com sucesso!");
+			          Listar();
+			      } 
+			      catch (Exception e) 
+			      {
+			        Mensagem("Erro : " + e.getMessage());
+			      }     
 	}
 	
 	public void click_Carregar(View v)
