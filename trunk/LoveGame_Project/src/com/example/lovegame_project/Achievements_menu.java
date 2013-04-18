@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MandarPergunta extends Activity {
+public class Achievements_menu extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,13 @@ public class MandarPergunta extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	 
 	 
-		setContentView(R.layout.activity_mandar_pergunta);
+		setContentView(R.layout.activity_achievements_menu);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mandar_pergunta, menu);
+		getMenuInflater().inflate(R.menu.achievements_menu, menu);
 		return true;
 	}
 

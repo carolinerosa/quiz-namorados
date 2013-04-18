@@ -34,6 +34,10 @@
             android:name="com.example.lovegame_project.MandarPergunta"
             android:label="@string/title_activity_mandar_pergunta" >
         </activity>
+        <activity
+            android:name="com.example.lovegame_project.Achievements_menu"
+            android:label="@string/title_activity_achievements_menu" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

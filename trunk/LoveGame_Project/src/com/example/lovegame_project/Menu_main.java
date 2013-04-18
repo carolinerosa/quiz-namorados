@@ -48,6 +48,10 @@ public class Menu_main extends Activity {
 	}
 	public void click_Achievements(View v)
 	{
+		ChangeLayout c2 = new ChangeLayout(Menu_main.this,Achievements_menu.class);
+	}
+	public void click_enviar_pergunta(View v)
+	{
 		ChangeLayout c2 = new ChangeLayout(Menu_main.this,MandarPergunta.class);
 	}
 	private void Mensagem(String msg) {

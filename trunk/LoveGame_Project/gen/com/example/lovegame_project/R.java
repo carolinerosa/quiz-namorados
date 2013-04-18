@@ -28,7 +28,7 @@ public final class R {
         public static final int action_settings=0x7f08000b;
         public static final int bt_achievements=0x7f08000a;
         public static final int bt_comecar=0x7f080009;
-        public static final int bt_creditos=0x7f080008;
+        public static final int bt_enviar_pergunta=0x7f080008;
         public static final int edtLer=0x7f080005;
         public static final int edtNomeArq=0x7f080001;
         public static final int edtSalvar=0x7f080002;
@@ -38,19 +38,22 @@ public final class R {
         public static final int txtRoot2=0x7f080000;
     }
     public static final class layout {
-        public static final int activity_love__game=0x7f030000;
-        public static final int activity_mandar_pergunta=0x7f030001;
-        public static final int activity_menumain=0x7f030002;
+        public static final int activity_achievements_menu=0x7f030000;
+        public static final int activity_love__game=0x7f030001;
+        public static final int activity_mandar_pergunta=0x7f030002;
+        public static final int activity_menumain=0x7f030003;
     }
     public static final class menu {
-        public static final int love__game=0x7f070000;
-        public static final int mandar_pergunta=0x7f070001;
-        public static final int menu_main=0x7f070002;
+        public static final int achievements_menu=0x7f070000;
+        public static final int love__game=0x7f070001;
+        public static final int mandar_pergunta=0x7f070002;
+        public static final int menu_main=0x7f070003;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
+        public static final int title_activity_achievements_menu=0x7f050008;
         public static final int title_activity_enviar_pergunta=0x7f050006;
         public static final int title_activity_mandar_pergunta=0x7f050007;
         public static final int title_activity_menu=0x7f050003;
