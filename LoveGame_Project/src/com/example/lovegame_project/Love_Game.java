@@ -2,6 +2,7 @@ package com.example.lovegame_project;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.Menu;
@@ -25,11 +26,12 @@ public class Love_Game extends Activity {
 	private TextView txtSalvar;
 	private TextView txtLer;
 	private Spinner SpnListarArquivos;
+	static Context context;
 	private ArrayList<String> Arquivos = new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		context=this;
 		 try 
 	     {
 				requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -51,14 +53,10 @@ public class Love_Game extends Activity {
 	        } 
 	        catch (Exception e) 
 	        {
-	       Mensagem("Erro : "+e.getMessage());
+	        	DebugLog.Get_Instance().Mensagem("Erro : "+e.getMessage());
 	        }        
 	   } 
 	
-	private void Mensagem(String msg) {
-		//  apenas informa no rodapé inferior da tela do Android o ocorrido
-		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-	}
 	private void Listar() {
 		File diretorio = new File(ObterDiretorio()); 
 		   File[] arquivos = diretorio.listFiles();    
@@ -105,12 +103,12 @@ public class Love_Game extends Activity {
 	          fos.write(dados);
 	          fos.flush();
 	          fos.close();
-	          Mensagem("Texto Salvo com sucesso!");
+	          DebugLog.Get_Instance().Mensagem("Texto Salvo com sucesso!");
 	          Listar();
 	      } 
 	      catch (Exception e) 
 	      {
-	        Mensagem("Erro : " + e.getMessage());
+	    	  DebugLog.Get_Instance().Mensagem("Erro : " + e.getMessage());
 	      }     
 	}
 	
@@ -137,12 +135,12 @@ public class Love_Game extends Activity {
 	                txtLer.append(lstrlinha);
 	          }
 	            
-	          Mensagem("Texto Carregado com sucesso!");
+	          DebugLog.Get_Instance().Mensagem("Texto Carregado com sucesso!");
 	             
 	      } 
 	      catch (Exception e) 
 	      {
-	         Mensagem("Erro : " + e.getMessage());
+	    	  DebugLog.Get_Instance().Mensagem("Erro : " + e.getMessage());
 	      }        
 	}
 	
