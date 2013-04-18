@@ -8,24 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MandarPergunta" >
 
-    <EditText
-        android:id="@+id/nomeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:layout_marginTop="33dp"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/corpoTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/corpoTxt"
-        android:layout_below="@+id/corpoTxt"
-        android:layout_marginTop="18dp"
-        android:ems="10" />
-
     <Button
         android:id="@+id/bt_enviarSalvo"
         android:layout_width="wrap_content"
@@ -61,5 +43,25 @@
         android:layout_alignRight="@+id/nomeTxt"
         android:onClick="click_voltar"
         android:text="Voltar" />
+
+    <EditText
+        android:id="@+id/nomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/corpoTxt"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="14dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/corpoTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_below="@+id/TextView01"
+        android:ems="10" />
 
 </RelativeLayout>
