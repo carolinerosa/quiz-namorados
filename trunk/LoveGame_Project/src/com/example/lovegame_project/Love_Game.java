@@ -33,13 +33,15 @@ public class Love_Game extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context=this;
-		 try 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	 setContentView(R.layout.activity_love__game);
+		
+		try 
 	     {
-				requestWindowFeature(Window.FEATURE_NO_TITLE);
-				getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-		                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			 setContentView(R.layout.activity_love__game);
+				
 	      
 	            
 	         txtRoot = (TextView) findViewById(R.id.txtRoot2);

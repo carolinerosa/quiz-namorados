@@ -9,8 +9,41 @@
     tools:context=".MandarPergunta" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Envie sua pergunta" />
+        android:text="@string/hello_world" />
+
+    <EditText
+        android:id="@+id/nomeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="40dp"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/corpoTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="33dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/bt_enviarSalvo"
+        android:onClick="click_enviarSalvo" 
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="32dp"
+        android:text="Button" />
 
 </RelativeLayout>
