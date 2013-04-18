@@ -90,7 +90,11 @@ public class Love_Game extends Activity {
 		  return root.toString();
 		
 	}
-	
+	public void click_Voltar(View v)
+	{
+		
+		ChangeLayout c2 = new ChangeLayout(Love_Game.this,Menu_main.class);
+	}
 	
 	public void click_Carregar(View v)
 	{
