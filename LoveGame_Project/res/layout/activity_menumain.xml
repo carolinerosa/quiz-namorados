@@ -21,8 +21,8 @@
         android:id="@+id/Button01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_creditos"
-        android:layout_below="@+id/bt_creditos"
+        android:layout_alignLeft="@+id/bt_enviar_pergunta"
+        android:layout_below="@+id/bt_enviar_pergunta"
         android:layout_marginTop="15dp"
         android:text="Instruções" />
 
@@ -36,7 +36,8 @@
         android:text="Jogar" />
 
     <Button
-        android:id="@+id/bt_creditos"
+        android:id="@+id/bt_enviar_pergunta"
+        android:onClick="click_enviar_pergunta" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_achievements"
@@ -49,7 +50,7 @@
         android:onClick="click_Achievements" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_creditos"
+        android:layout_alignLeft="@+id/bt_enviar_pergunta"
         android:layout_below="@+id/bt_comecar"
         android:layout_marginTop="18dp"
         android:text="Achievements" />

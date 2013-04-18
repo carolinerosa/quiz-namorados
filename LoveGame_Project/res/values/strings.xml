@@ -9,5 +9,6 @@
     <string name="title_activity_menu_main_">MenuMain_</string>
     <string name="title_activity_enviar_pergunta">EnviarPergunta</string>
     <string name="title_activity_mandar_pergunta">MandarPergunta</string>
+    <string name="title_activity_achievements_menu">Achievements_menu</string>
 
 </resources>
