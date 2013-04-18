@@ -7,5 +7,7 @@
     <string name="title_activity_menu">MainActivity</string>
     <string name="title_activity_menu_love">MenuLove</string>
     <string name="title_activity_menu_main_">MenuMain_</string>
+    <string name="title_activity_enviar_pergunta">EnviarPergunta</string>
+    <string name="title_activity_mandar_pergunta">MandarPergunta</string>
 
 </resources>

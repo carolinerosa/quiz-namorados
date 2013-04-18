@@ -30,7 +30,7 @@
         android:id="@+id/bt_comecar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_instructions"
+        android:layout_alignLeft="@+id/bt_achievements"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="58dp"
         android:text="Jogar" />
@@ -39,13 +39,14 @@
         android:id="@+id/bt_creditos"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_instructions"
+        android:layout_below="@+id/bt_achievements"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:text="Envie sua pergunta" />
 
     <Button
-        android:id="@+id/bt_instructions"
+        android:id="@+id/bt_achievements"
+        android:onClick="click_Achievements" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bt_creditos"
