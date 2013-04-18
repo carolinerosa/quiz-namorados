@@ -24,10 +24,11 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
+        public static final int Button01=0x7f080007;
+        public static final int action_settings=0x7f08000b;
         public static final int bt_comecar=0x7f080009;
-        public static final int bt_creditos=0x7f080007;
-        public static final int bt_instructions=0x7f080008;
+        public static final int bt_creditos=0x7f080008;
+        public static final int bt_instructions=0x7f08000a;
         public static final int edtLer=0x7f080005;
         public static final int edtNomeArq=0x7f080001;
         public static final int edtSalvar=0x7f080002;
