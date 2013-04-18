@@ -1,0 +1,56 @@
+Love In Game
+Ata - Reuniões
+
+Todos os participantes do grupo estavam presentes.
+
+07/03/2013
+Inicialmente, o grupo tinha quatro ideias em mente e, por isso, chamamos o professor Winston para nos orientar na escolha da melhor ideia. Entre os possíveis produtos, estavam:
+1	Tamagotchi 
+2	Jogo para crianças
+3	Jogo de cartas para namorados
+4	Jogo estilo Super Trunfo
+
+
+Optamos pela terceira opção.
+
+Discutimos que ferramentas iríamos utilizar para a produção do jogo e separamos os papeis de cada integrante da equipe no projeto. 
+Resultando:
+
+Ana Carolina Ferreira - Multimídia
+Ilustração
+Storyboard
+ Anna Carolina Pontes: Multimídia
+Ilustração
+Brainstorm de layouts
+Interface (paleta de cor, ícones)        
+ Brenda Ferraz: Multimídia
+Interface
+Sonoplastia
+Matheus Gomes: Multimídia
+Ilustração
+Storyboard
+Sonoplastia
+ Rayane Pariz: Multimídia
+Interface (paleta de cor, ícones)
+Sonoplastia
+Bárbara Queiroz: Roteirista/Pesquisadora
+Roteiro das telas de jogo
+Pesquisa/Montagem do Banco de dados
+Thayla Carvalho: Roteirista
+Mapa Conceitual
+
+Caroline Rosa – Programadora/Testadora
+Aplicação sonora;
+Banco de Dados;
+Playtest do jogo.
+Julien Leal : Programador/Elo de grupo
+A comunicação com o campo de multimídia / roteiro;
+Implementação da interface;
+Serviço de Bluetooth;
+Diagramas UML.
+Thauan Lopes – Programador/GameDesign
+Prototipagem;
+Aplicação de achievements (realizações) e medalhas;
+Serviço de Bluetooth;
+GDD (Game Design Document).      	
+ 
