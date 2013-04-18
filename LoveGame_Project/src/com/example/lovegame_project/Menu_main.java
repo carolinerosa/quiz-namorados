@@ -44,6 +44,11 @@ public class Menu_main extends Activity {
 		});
 		
 		
+		
+	}
+	public void click_Achievements(View v)
+	{
+		ChangeLayout c2 = new ChangeLayout(Menu_main.this,MandarPergunta.class);
 	}
 	private void Mensagem(String msg) {
 		//  apenas informa no rodapé inferior da tela do Android o ocorrido
