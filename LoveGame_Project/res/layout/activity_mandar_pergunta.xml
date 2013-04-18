@@ -48,7 +48,8 @@
         android:id="@+id/nomeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/corpoTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="14dp"
         android:ems="10" >
@@ -61,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignRight="@+id/nomeTxt"
         android:layout_below="@+id/TextView01"
         android:ems="10" />
 

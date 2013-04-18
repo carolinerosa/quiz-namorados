@@ -32,11 +32,11 @@ public final class R {
         public static final int bt_comecar=0x7f08000e;
         public static final int bt_enviarSalvo=0x7f080007;
         public static final int bt_enviar_pergunta=0x7f08000d;
+        public static final int button1=0x7f080001;
         public static final int corpoTxt=0x7f08000a;
         public static final int edtLer=0x7f080005;
         public static final int nomeTxt=0x7f080008;
         public static final int spListarArquivos=0x7f080004;
-        public static final int teste=0x7f080001;
         public static final int textView1=0x7f080000;
         public static final int txtPreencher=0x7f080003;
         public static final int txtRoot2=0x7f080002;
