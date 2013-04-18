@@ -32,7 +32,7 @@ public class SalvarPergunta extends Activity{
 	          fos.flush();
 	          fos.close();
 	          DebugLog.Get_Instance().Mensagem("Texto Salvo com sucesso!");
-	          Love_Game.GetInstance().Listar();
+	         // Love_Game.GetInstance().Listar();
 	      } 
 	      catch (Exception e) 
 	      {
