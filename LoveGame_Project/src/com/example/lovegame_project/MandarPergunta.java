@@ -41,6 +41,11 @@ public class MandarPergunta extends Activity {
 	{
 		SalvarPergunta();
 	}
+	public void click_voltar(View v)
+	{
+		ChangeLayout c2 = new ChangeLayout(MandarPergunta.this,Menu_main.class);
+	}
+	
 	void SalvarPergunta()
 	{
 		//pega o texto criado, e o diretorio(file),pega os bytes do texto e manda usando o FileOutputStream, dando o diretório e o byte a ser enviado.
