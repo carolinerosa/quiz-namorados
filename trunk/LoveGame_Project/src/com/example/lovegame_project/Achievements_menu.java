@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -14,12 +15,13 @@ public class Achievements_menu extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_achievements_menu);
-		
-				requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		setContentView(R.layout.activity_achievements_menu);
+		
+				
 	 
 	 
 		
@@ -28,6 +30,12 @@ public class Achievements_menu extends Activity {
 	private void Mensagem(String msg) {
 		//  apenas informa no rodapé inferior da tela do Android o ocorrido
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+	}
+	
+	public void click_Voltar(View v)
+	{
+		
+		ChangeLayout c2 = new ChangeLayout(Achievements_menu.this,Menu_main.class);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
