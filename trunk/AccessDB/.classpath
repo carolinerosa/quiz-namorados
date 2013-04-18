@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/convidado_oi/Desktop/mysql-connector-java-5.1.24/mysql-connector-java-5.1.24-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/convidado_oi/Desktop/ksoap2-android-assembly-2.5.8-jar-with-dependencies.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="lib" path="assets/ksoap2-android-assembly-2.5.8-jar-with-dependencies.jar.zip"/>
+	<classpathentry exported="true" kind="lib" path="assets/mysql-connector-java-5.1.24-bin.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
