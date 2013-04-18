@@ -31,7 +31,7 @@ public class dbMySQL extends Activity{
             }
             try{
                 conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+porta+"/"+banco,usuario,senha);
-                Log.i("MYSQL","Conectado.");
+               
                 Toast.makeText(context.getApplicationContext(), "MySQL conexão feita com sucesso.", Toast.LENGTH_SHORT).show(); 
             }catch(Exception erro){
                 Log.e("MYSQL","Erro: "+erro);
@@ -51,13 +51,18 @@ public class dbMySQL extends Activity{
         try{
    
         	st=conn.createStatement();
-            sql="SELECT * FROM Persons";
+        	sql="SELECT * FROM Persons";
             rs=st.executeQuery(sql);
+            
             rs.first();
             rs.absolute(2);
-            Log.i("MYSQL","Resultado: "+rs.getString("LastName"));
+            Toast.makeText(context.getApplicationContext(), "Resultado: "+rs.getString("LastName"),Toast.LENGTH_SHORT).show();
+            /* Inserir Linhas
+            sql="INSERT INTO Persons VALUES(0,'caroool','rooosa','ruuaparauna','riio')";
+            st.executeUpdate(sql);
+            */
         } catch (Exception erro){
-            Log.e("MYSQL","Erro: "+erro);
+            Toast.makeText(context.getApplicationContext(), "Erro: "+erro,Toast.LENGTH_SHORT).show();
         }
     }
     
