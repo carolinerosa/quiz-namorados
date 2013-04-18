@@ -10,23 +10,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Achievements_menu extends Activity {
-	private TextView teste;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_achievements_menu);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+				requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		try 
-	     {
+	 
+	 
 		
-		
-	     }catch(Exception e)
-	     {
-	    	Mensagem("erro"+e.getMessage());
-			}
 		
 	}
 	private void Mensagem(String msg) {

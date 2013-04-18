@@ -45,8 +45,7 @@ public class Love_Game extends Activity {
 	      
 	            
 	         txtRoot = (TextView) findViewById(R.id.txtRoot2);
-	         txtNomeArq = (TextView) findViewById(R.id.edtNomeArq);
-	         txtSalvar = (TextView) findViewById(R.id.edtSalvar);
+	         
 	         txtLer = (TextView) findViewById(R.id.edtLer);
 	         SpnListarArquivos = (Spinner)  findViewById(R.id.spListarArquivos); 
 	         txtRoot.append(ObterDiretorio());
@@ -91,37 +90,7 @@ public class Love_Game extends Activity {
 		  return root.toString();
 		
 	}
-	public void click_Salvar(View v)
-	{
-		SalvarPergunta();
-	}
-	void SalvarPergunta()
-	{
-		//pega o texto criado, e o diretorio(file),pega os bytes do texto e manda usando o FileOutputStream, dando o diretório e o byte a ser enviado.
-				String lstrNomeArq;
-			     File arq;
-			     byte[] dados;
-			      try
-			      {
-			          lstrNomeArq = txtNomeArq.getText().toString();
-			             
-			arq = new File(Environment.getExternalStorageDirectory(), lstrNomeArq);
-			          FileOutputStream fos;
-			             
-			dados = txtSalvar.getText().toString().getBytes();
-			             
-			          fos = new FileOutputStream(arq);
-			          fos.write(dados);
-			          fos.flush();
-			          fos.close();
-			          Mensagem("Texto Salvo com sucesso!");
-			          Listar();
-			      } 
-			      catch (Exception e) 
-			      {
-			        Mensagem("Erro : " + e.getMessage());
-			      }     
-	}
+	
 	
 	public void click_Carregar(View v)
 	{
