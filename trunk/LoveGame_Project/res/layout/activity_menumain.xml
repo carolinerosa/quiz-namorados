@@ -24,7 +24,7 @@
         android:layout_below="@+id/bt_instructions"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
-        android:text="Créditos" />
+        android:text="Envie sua pergunta" />
 
     <Button
         android:id="@+id/bt_instructions"
@@ -33,7 +33,7 @@
         android:layout_alignRight="@+id/bt_creditos"
         android:layout_below="@+id/bt_comecar"
         android:layout_marginTop="30dp"
-        android:text="Instruções" />
+        android:text="Achievements" />
 
     <Button
         android:id="@+id/bt_comecar"
