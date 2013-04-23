@@ -21,10 +21,11 @@ public class MainActivity extends Activity {
 		Log.i("Activity", "Start");
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_main);
+		MinhasCoisas.setCurrentActivity(this);
 		
 		mBT = BluetoothAdapter.getDefaultAdapter();
 		if(mBT != null){
-			MeuToast.Show(getApplicationContext(), "Este telefone possui tecnologia Bluetooth");
+			MinhasCoisas.Show( "Este telefone possui tecnologia Bluetooth");
 			if(mBT.isEnabled())
 			{
 				Button b = (Button) findViewById(R.id.activateBtButton);
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
 			
 		}else
 		{
-			MeuToast.Show(getApplicationContext(), "Este telefone não possui tecnologia Bluetooth");
+			MinhasCoisas.Show( "Este telefone não possui tecnologia Bluetooth");
 			finish();
 		}
 		
@@ -47,13 +48,15 @@ public class MainActivity extends Activity {
 		if (!mBT.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, REQUEST.REQUEST_ENABLE_BT);
+		    Button b = (Button) findViewById(R.id.activateBtButton);
+			b.setText(R.string.turn_bt_off);
 		}else
 		{
 			mBT.disable();
 			Button b = (Button) findViewById(R.id.activateBtButton);
 			b.setText(R.string.turn_bt_on);
 			
-			MeuToast.Show(getApplicationContext(),"Bluetooth desligado");
+			MinhasCoisas.Show("Bluetooth desligado");
 		}
 		
 	}
@@ -68,13 +71,13 @@ public class MainActivity extends Activity {
 		if(resultCode == RESULT_OK){
 			if(REQUEST.REQUEST_ENABLE_BT == requestCode)
 			{
-				MeuToast.Show(getApplicationContext(),"Bluetooth ligado");
+				MinhasCoisas.Show("Bluetooth ligado");
 				Button b = (Button) findViewById(R.id.activateBtButton);
 				b.setText(R.string.turn_bt_off);
 			}
 		}else
 		{
-			MeuToast.Show(getApplicationContext(),"erro ao tentar ligar Bluetooth");
+			MinhasCoisas.Show("erro ao tentar ligar Bluetooth");
 		}
 	}
 	
@@ -94,6 +97,8 @@ public class MainActivity extends Activity {
 	@Override
 	public void onDestroy()
 	{
+		super.onDestroy();
+		
 		if(mBT.isEnabled())
 		this.mBT.disable();
 		

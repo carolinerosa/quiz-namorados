@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <resources>
+
     <string name="app_name">BluetoothPrototype</string>
     <string name="action_settings">Settings</string>
-    
-	<!--     Device List -->
+
+    <!-- Device List -->
     <string name="title_activity_device_list">Lista de Dispositivos</string>
     <string name="scanButton">Procurar novos dispositivos</string>
     <string name="listaDePareados">Pareados</string>
     <string name="NewDevices">Dispositivos encontrados</string>
-    
-	<!--     Activity Principal -->
+
+    <!-- Activity Principal -->
     <string name="turn_bt_on">Ligar Bluetooth</string>
     <string name="turn_bt_off">Desligar Bluetooth</string>
     <string name="connect">Conectar a um dispositivo</string>
-  	<string name="leave">Sair</string>
+    <string name="leave">Sair</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="hello_world">Hello world!</string>
     
+	<!--     Chat Activity -->
+	<string name="send_button" > Send </string>
+	
 
 </resources>
