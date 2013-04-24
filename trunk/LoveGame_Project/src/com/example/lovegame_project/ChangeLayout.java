@@ -4,11 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 
 public class ChangeLayout {
-	//Intent trocatela = new Intent(Menu_main.this,Love_Game.class);	
-	public ChangeLayout(Activity Class1,Class<?> Class2)
+	
+	private static ChangeLayout instance;
+	private static Intent trocatela;
+	
+	public static ChangeLayout getInstance()
 	{
-		Intent trocatela = new Intent(Class1,Class2);	
+		if(instance == null)
+		{
+			instance = new ChangeLayout();
+		}
+		
+		return instance;
+		
+	}
+	
+	public void changeLayout(Activity Class1,Class<?> Class2)
+	{
+		trocatela = new Intent(Class1,Class2);	
 		Class1.startActivity(trocatela);
-		Class1.finish();
+		//Class1.finish();
 	}
 }

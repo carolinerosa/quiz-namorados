@@ -11,19 +11,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.NotificationCompat.Action;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class DeviceList extends Activity {
 
 	private static final String TAG = "DEVICE LIST";
-
+	private static final int ENABLE_BT_REQUEST = 1;
+	private static final int HANDLER_DEVICES_THREAD = 1;
+	
 	private BluetoothAdapter btAdapter;
 	
 	private ListView pairedDevicesList;
@@ -37,6 +43,8 @@ public class DeviceList extends Activity {
 	private boolean IsBroadcastReceiverRunning = false;
 	
 	private BroadcastReceiver mBroadcastReceiver;
+	private Handler handler;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,6 @@ public class DeviceList extends Activity {
 		setContentView(R.layout.activity_device_list);
 		MinhasCoisas.setCurrentActivity(this);
 
-		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 		
 		this.pairedDevicesList = (ListView)findViewById(R.id.paired_devices);
@@ -59,23 +66,20 @@ public class DeviceList extends Activity {
 	    Intent discoverableIntent = new
 		Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 		discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60);
+		
 		startActivity(discoverableIntent);
 		
 		
 		BluetoothConnectionManager btManager = new BluetoothConnectionManager(getApplicationContext()); 
-		
 		
 		// Select device on Paired List View
 		this.pairedDevicesList.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View view,
 	                int position, long id) {
 	        
-	        String s = (String) pairedDevicesList.getItemAtPosition(position);
+	        MinhasCoisas.Show("Aguarde para entrar no chat.");
 	        Cliente cliente = new Cliente(pairedDevices.get(position), getApplicationContext(), true);
 	        MinhasCoisas.setCliente(cliente);
-	       	Toast.makeText(getBaseContext(),s,Toast.LENGTH_SHORT).show();
-
-	       	MinhasCoisas.Show("Aguarde para entrar no chat.");
 	       	
 	        }
 	    });
@@ -84,14 +88,12 @@ public class DeviceList extends Activity {
 		this.newDevicesList.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View view,
 	                int position, long id) {
-
-	        String s = (String) newDevicesList.getItemAtPosition(position);
 	        
 	        MinhasCoisas.Show("Aguarde para entrar no chat.");
 	        Cliente cliente = new Cliente(newDevices.get(position), getApplicationContext(), true);
 	        MinhasCoisas.setCliente(cliente);
-	       	Toast.makeText(getBaseContext(),s,Toast.LENGTH_SHORT).show();
-	       	
+	        
+	        	       	
 	        }
 	    });
 		
@@ -112,7 +114,28 @@ public class DeviceList extends Activity {
 
 		};
 		
+		this.handler = new Handler()
+		{
+			@Override
+			public void handleMessage(Message msg) {
+				
+				if(msg.what == HANDLER_DEVICES_THREAD)
+				{
+					AtualizarNewDevicesList();
+				}
+				
+				super.handleMessage(msg);
+			}
+		};
+		
 	}
+	
+	public void AtualizarNewDevicesList()
+	{
+		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
+		Log.i(TAG, "Atualizou a lista de device");
+	}
+	
 	public void onClick_Scan(View v)
 	{
 		Scan();
@@ -148,6 +171,35 @@ public class DeviceList extends Activity {
 
 		this.IsBroadcastReceiverRunning = true;
 		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
+		
+		Thread thread = new Thread(new Runnable()
+		{
+			@Override
+			public void run() {
+				float cronometro = 0;
+				float searchTime = 10;
+				float updateInterval = 2;
+				float updateTime = updateInterval;
+				while(cronometro <= searchTime)
+				{
+					cronometro += TimeManager.getInstance().getDeltaTime()/1000;
+
+					Log.i(TAG, String.valueOf(cronometro));
+					
+					if(cronometro >= updateTime)
+					{
+						updateTime += updateInterval;
+						Message msg = new Message();
+						msg.what = HANDLER_DEVICES_THREAD;
+						handler.sendMessage(msg);
+					}
+				}
+				
+				
+			}
+		});
+			thread.start();
+
 			
 	}
 
@@ -222,3 +274,4 @@ public class DeviceList extends Activity {
 	}
 
 }
+

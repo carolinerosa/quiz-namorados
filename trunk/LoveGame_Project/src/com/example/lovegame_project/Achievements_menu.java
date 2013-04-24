@@ -35,7 +35,8 @@ public class Achievements_menu extends Activity {
 	public void click_Voltar(View v)
 	{
 		
-		ChangeLayout c2 = new ChangeLayout(Achievements_menu.this,Menu_main.class);
+
+		ChangeLayout.getInstance().changeLayout(Achievements_menu.this,Menu_main.class);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

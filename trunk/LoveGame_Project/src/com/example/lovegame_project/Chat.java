@@ -19,6 +19,11 @@ public class Chat extends Activity {
 
 	}
 
+	public void ChangeVisualization(boolean turn)
+	{
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -33,6 +38,10 @@ public class Chat extends Activity {
 		MinhasCoisas.getCliente().write(editText.getText().toString());
 	}
 	
+	public void MudarPergunta()
+	{
+		
+	}
 	
 	@Override
 	public void onDestroy()
