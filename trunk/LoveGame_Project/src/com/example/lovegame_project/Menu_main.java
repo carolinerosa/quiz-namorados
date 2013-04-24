@@ -21,15 +21,16 @@ public class Menu_main extends Activity {
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		setContentView(R.layout.activity_menumain);
+		
 		Button	btcomecar = (Button)findViewById (R.id.bt_comecar);
 		Button btinstrucoes = (Button)findViewById (R.id.bt_comecar);
 		Button btcreditos = (Button)findViewById (R.id.bt_comecar);
 		
-		//Button Comecar
+		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
 			@Override

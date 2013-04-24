@@ -40,10 +40,7 @@ public class Love_Game extends Activity {
 	 setContentView(R.layout.activity_love__game);
 		
 		try 
-	     {
-				
-	      
-	            
+	     { 
 	         txtRoot = (TextView) findViewById(R.id.txtRoot2);
 	         
 	         txtLer = (TextView) findViewById(R.id.edtLer);
@@ -65,7 +62,7 @@ public class Love_Game extends Activity {
 	}
 	private void Listar() {
 		File diretorio = new File(ObterDiretorio()); 
-		   File[] arquivos = diretorio.listFiles();    
+		File[] arquivos = diretorio.listFiles();    
 		if(arquivos != null)
 		   { 
 		      int length = arquivos.length; 
@@ -78,11 +75,11 @@ public class Love_Game extends Activity {
 		          } 
 		      }
 		   
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-		(this,android.R.layout.simple_dropdown_item_1line, Arquivos);
-		     SpnListarArquivos.setAdapter(arrayAdapter);
-		    }   
-		}
+	      ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+	      (this,android.R.layout.simple_dropdown_item_1line, Arquivos);
+	      SpnListarArquivos.setAdapter(arrayAdapter);
+		}  
+	}
 	
 	private  String ObterDiretorio() {
 		// Retorna o diretório de armazenamento externo
