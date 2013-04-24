@@ -43,7 +43,7 @@ public class MandarPergunta extends Activity {
 	}
 	public void click_voltar(View v)
 	{
-		ChangeLayout c2 = new ChangeLayout(MandarPergunta.this,Menu_main.class);
+		ChangeLayout.getInstance().changeLayout(MandarPergunta.this,Menu_main.class);	
 	}
 	
 	void SalvarPergunta()

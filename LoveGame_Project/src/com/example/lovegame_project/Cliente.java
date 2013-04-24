@@ -26,6 +26,7 @@ public class Cliente implements Runnable{
 	private boolean connect = false;
 	private boolean connected = true;
 	
+	private boolean turn = false;
 	public Cliente(BluetoothDevice device, Context context, boolean connect) {
 		
 		Log.i(TAG, "Cliente criado com sucesso");
@@ -66,10 +67,13 @@ public class Cliente implements Runnable{
 		if(BluetoothAdapter.getDefaultAdapter().isDiscovering())
         BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
  
+		connected = true;
+		
 		if(this.connect){
         try {
             mSocket.connect();
             connected = true;
+            this.turn = false;
             Log.i(TAG, "Conectado ao dispositivo");
             BluetoothConnectionManager.Cancel(); 
             
@@ -81,8 +85,12 @@ public class Cliente implements Runnable{
             } catch (IOException closeException) { }
             return;
         }
+		}else
+		{
+			this.turn = true;
 		}
 		try{
+			
 			this.mInputStream = mSocket.getInputStream();
 			this.mOutputStream = mSocket.getOutputStream();
 			
@@ -100,6 +108,14 @@ public class Cliente implements Runnable{
 		{
 			
 		}
+		
+		MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				Intent sendRoom = new Intent(MinhasCoisas.getCurrentActivity(), Chat.class);
+				MinhasCoisas.getCurrentActivity().startActivity(sendRoom);
+			}
+		});
 		
 		byte[] bytes = new byte[100];
 		

@@ -32,7 +32,7 @@ public class Love_Game extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context=this;
+		context = this;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -89,8 +89,7 @@ public class Love_Game extends Activity {
 	}
 	public void click_Voltar(View v)
 	{
-		
-		ChangeLayout c2 = new ChangeLayout(Love_Game.this,Menu_main.class);
+		ChangeLayout.getInstance().changeLayout(Love_Game.this,Menu_main.class);
 	}
 	
 	public void click_Carregar(View v)
