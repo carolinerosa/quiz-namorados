@@ -11,4 +11,21 @@
     <string name="title_activity_mandar_pergunta">MandarPergunta</string>
     <string name="title_activity_achievements_menu">Achievements_menu</string>
 
+    <!-- Device List -->
+    <string name="title_activity_device_list">Lista de Dispositivos</string>
+    <string name="scanButton">Procurar novos dispositivos</string>
+    <string name="listaDePareados">Pareados</string>
+    <string name="NewDevices">Dispositivos encontrados</string>
+
+    <!-- Activity Principal -->
+    <string name="turn_bt_on">Ligar Bluetooth</string>
+    <string name="turn_bt_off">Desligar Bluetooth</string>
+    <string name="connect">Conectar a um dispositivo</string>
+    <string name="leave">Sair</string>
+    <string name="title_activity_chat">Chat</string>
+
+    <!-- Chat Activity -->
+    <string name="send_button"> Send </string>
+    <string name="title_activity_main">MainActivity</string>
+
 </resources>
