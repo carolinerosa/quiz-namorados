@@ -1,7 +1,7 @@
 Esta página é sobre o projeto de Integração realizado pelo C.E.J.L.L - NAVE de turmas do 3º ano. Em suma, se trata de um mobile game para namorados.
 
 Introdução:
-<nome> é um jogo para namorados. Encontra-se no momento em produção e estará disponível para dispositivos ANDROID em 21/06/2013. 
+Love in Game é um jogo para namorados. Encontra-se no momento em produção e estará disponível para dispositivos ANDROID em 21/06/2013. 
 Com certeza os namorados adorarão o jogo pois aumentará o conhecimento dos namorados sobre eles mesmos. 
 
 
@@ -17,10 +17,6 @@ Relembrará ao casal momentos que passaram juntos
 Proporcionará uma expectativa da vida que um casal viveria juntos: Ao jogar o game, um casal compreenderá melhor o namorado, o que poderá evitar futuros arrependimentos com relação ao companheiro escolhido.
 
 Tudo isso em um só game!
-
-Sobre o funcionamento:
-
-
 
 
 = Details =
