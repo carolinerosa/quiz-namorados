@@ -20,110 +20,59 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 public class Love_Game extends Activity {
-	private TextView txtRoot;
-	private TextView txtNomeArq;
-	private TextView txtSalvar;
-	private TextView txtLer;
-	private Spinner SpnListarArquivos;
-	private ArrayList<String> Arquivos = new ArrayList<String>();
+	private TextView Pergunta;
+	private TextView Salvar;
+
 	static Context context;
-	
+	CreateDB access;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		access = new CreateDB(this, "LoveGame_Perguntas", null, 1);
 		context = this;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	 setContentView(R.layout.activity_love__game);
-		
-		try 
-	     { 
-	         txtRoot = (TextView) findViewById(R.id.txtRoot2);
-	         
-	         txtLer = (TextView) findViewById(R.id.edtLer);
-	         SpnListarArquivos = (Spinner)  findViewById(R.id.spListarArquivos); 
-	         txtRoot.append(ObterDiretorio());
-	            
-	         Listar();
-	         
-	        } 
-	        catch (Exception e) 
-	        {
-	       Mensagem("Erro : "+e.getMessage());
-	        }        
-	   } 
-	
+		setContentView(R.layout.activity_love__game);
+
+		Pergunta = (TextView) findViewById(R.id.Pergunta);
+		Salvar = (TextView) findViewById(R.id.Resposta);
+
+		// /Trecho DBLOCAL
+		Pergunta.setText(access.Queery(access.Length()));
+	}
+
 	private void Mensagem(String msg) {
-		//  apenas informa no rodapé inferior da tela do Android o ocorrido
+		// apenas informa no rodapé inferior da tela do Android o ocorrido
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
-	private void Listar() {
-		File diretorio = new File(ObterDiretorio()); 
-		File[] arquivos = diretorio.listFiles();    
-		if(arquivos != null)
-		   { 
-		      int length = arquivos.length; 
-		      for(int i = 0; i < length; ++i)
-		      { 
-		          File f = arquivos[i]; 
-		          if (f.isFile())
-		          {
-		              Arquivos.add(f.getName());
-		          } 
-		      }
-		   
-	      ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-	      (this,android.R.layout.simple_dropdown_item_1line, Arquivos);
-	      SpnListarArquivos.setAdapter(arrayAdapter);
-		}  
+
+	public void click_Voltar(View v) {
+
+		ChangeLayout.getInstance().changeLayout(Love_Game.this, Menu_main.class);
 	}
-	
-	private  String ObterDiretorio() {
-		// Retorna o diretório de armazenamento externo
-		 File root = android.os.Environment.getExternalStorageDirectory();
-		  return root.toString();
-		
+
+	public void click_AvaliarSim(View v) {
+		// /Trecho DBLOCAL em que avalio a resposta como correta
+
+		access.Update(access.Length(), 1);
+		Mensagem("A pergunta: '"
+				+ access.Queery(access.Length()) + "' aprovada pelo usuário");
+
 	}
-	public void click_Voltar(View v)
-	{
-		ChangeLayout.getInstance().changeLayout(Love_Game.this,Menu_main.class);
+
+	public void click_AvaliarNao(View v) {
+		// /Trecho DBLOCAL em que avalio a resposta como incorreta
+
+		access.Update(access.Length(), 2);
+		Mensagem("A pergunta: '"
+				+ access.Queery(access.Length()) + "' desaprovada pelo usuário");
+
 	}
-	
-	public void click_Carregar(View v)
-	{
-	    String lstrNomeArq;
-	     File arq; 
-	     String lstrlinha;
-	     try
-	     {
-	lstrNomeArq = SpnListarArquivos.getSelectedItem().toString();
-	 
-	          txtLer.setText("");
-	              
-	arq = new File(Environment.getExternalStorageDirectory(), lstrNomeArq);
-	BufferedReader br = new BufferedReader(new FileReader(arq));
-	          
-	          while ((lstrlinha = br.readLine()) != null) 
-	          {
-	               if (!txtLer.getText().toString().equals(""))
-	                {
-	                    txtLer.append("\n");
-	                }
-	                txtLer.append(lstrlinha);
-	          }
-	            
-	          Mensagem("Texto Carregado com sucesso!");
-	             
-	      } 
-	      catch (Exception e) 
-	      {
-	         Mensagem("Erro : " + e.getMessage());
-	      }        
-	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
