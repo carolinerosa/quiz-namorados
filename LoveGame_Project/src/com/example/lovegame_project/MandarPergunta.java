@@ -17,66 +17,50 @@ import android.widget.Toast;
 public class MandarPergunta extends Activity {
 	private TextView txtNomeArq;
 	private TextView txtSalvar;
+	CreateDB access;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		access = new CreateDB(this, "LoveGame_Perguntas", null, 1);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		try{
+		try {
 			setContentView(R.layout.activity_mandar_pergunta);
-		txtNomeArq = (TextView) findViewById(R.id.nomeTxt);
-		txtSalvar = (TextView) findViewById(R.id.corpoTxt);
-		
-		
-		}catch(Exception e)
-		{
-			
+
+			txtSalvar = (TextView) findViewById(R.id.nomeTxt);
+
+		} catch (Exception e) {
+
 		}
-	 
-		
+
 	}
-	public void click_enviarSalvo(View v)
-	{
+
+	public void click_enviarSalvo(View v) {
 		SalvarPergunta();
 	}
-	public void click_voltar(View v)
-	{
-		ChangeLayout.getInstance().changeLayout(MandarPergunta.this,Menu_main.class);	
+
+	public void click_voltar(View v) {
+		ChangeLayout.getInstance().changeLayout(MandarPergunta.this, Menu_main.class);
 	}
-	
-	void SalvarPergunta()
-	{
-		//pega o texto criado, e o diretorio(file),pega os bytes do texto e manda usando o FileOutputStream, dando o diretório e o byte a ser enviado.
-				String lstrNomeArq;
-			     File arq;
-			     byte[] dados;
-			      try
-			      {
-			          lstrNomeArq = txtNomeArq.getText().toString();
-			             
-			arq = new File(Environment.getExternalStorageDirectory(), lstrNomeArq);
-			          FileOutputStream fos;
-			             
-			dados = txtSalvar.getText().toString().getBytes();
-			             
-			          fos = new FileOutputStream(arq);
-			          fos.write(dados);
-			          fos.flush();
-			          fos.close();
-			         Mensagem("Texto Salvo com sucesso!");
-			          //Listar();
-			      } 
-			      catch (Exception e) 
-			      {
-			    	 
-			      }     
+
+	void SalvarPergunta() {
+		// /Trecho DBLOCAL em que salvo a pergunta desejada no banco
+
+		access.Add(access.Length() + 1, txtSalvar.getText().toString(), 0);
+
+		Mensagem("A pergunta:'" + access.Queery(access.Length())
+				+ "' foi salva com sucesso!");
+
 	}
+
 	private void Mensagem(String msg) {
-		//  apenas informa no rodapé inferior da tela do Android o ocorrido
+		// apenas informa no rodapé inferior da tela do Android o ocorrido
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

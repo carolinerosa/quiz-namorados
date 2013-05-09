@@ -18,39 +18,69 @@
         <LinearLayout android:layout_width="fill_parent" 
             android:gravity="center_vertical" 
             android:layout_height="wrap_content">
-            
-            <Spinner android:id="@+id/spListarArquivos" 
-                android:layout_width="220dp" 
-                android:layout_weight="10" 
-                android:layout_height="50dp"/>
-        
-            <Button android:layout_weight="1.0" 
-                android:text="Carregar txt" 
-                android:onClick="click_Carregar" 
-                android:layout_width="115dp" 
-                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="click_Carregar"
+                android:text="Pergunta" />
         
         </LinearLayout>
- 
-    <TextView
-        android:text="Texto do arquivo a ser carregado:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
- 
+
+
+
+        <TextView
+            android:id="@+id/Pergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.10"
+            android:text="Pergunta" />
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Resposta" />
+
    <EditText
-       android:id="@+id/edtLer"
+       android:id="@+id/Resposta"
        android:layout_width="match_parent"
        android:layout_height="60dp"
+       android:ems="10"
        android:gravity="top"
        android:lines="2"
-       android:singleLine="false"
-       android:text="" />
+       android:singleLine="false" >
+
+       <requestFocus />
+   </EditText>
+
 
    <Button
        android:id="@+id/Voltar"
-       android:onClick="click_Voltar" 
-       android:layout_width="match_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:onClick="click_Voltar"
        android:text="Voltar" />
+
+
+
+
+
+
+
+   <Button
+       android:id="@+id/Sim"
+       android:layout_width="242dp"
+       android:layout_height="wrap_content"
+       android:onClick="click_AvaliarSim"
+       android:text="Sim" />
+
+   <Button
+       android:id="@+id/Nao"
+       android:layout_width="242dp"
+       android:layout_height="wrap_content"
+       android:onClick="click_AvaliarNao"
+       android:text="Não" />
 
 </LinearLayout>
