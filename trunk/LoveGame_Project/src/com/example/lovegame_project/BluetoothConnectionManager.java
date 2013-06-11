@@ -58,6 +58,8 @@ public class BluetoothConnectionManager implements Runnable{
 	public void run() {
 		try {
 			btSocket = mBtServerSocket.accept();
+			
+			Chat.suaVez = true;
 			Log.i(TAG, "Aceitou uma nova conexão");
 		} catch (IOException e) {
 			
