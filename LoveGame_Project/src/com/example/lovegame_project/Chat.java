@@ -11,12 +11,31 @@ public class Chat extends Activity {
 
 	private static final String TAG = "CHAT";
 	
+	private String pergunta;
+	public static boolean suaVez = false;
+	private int pontos = 0;
+	private boolean corrigir = false;
+	private int rodada = 1;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
 		MinhasCoisas.setCurrentActivity(this);
-
+		
+		MinhasCoisas.Show(String.valueOf(suaVez));
+		
+		// ---------- pegar pergunta do BD
+			pergunta = "Você é um bunda?";
+		// ----------
+			
+		if(suaVez)
+		{
+			
+		}else
+		{
+			
+		}
 	}
 
 	public void ChangeVisualization(boolean turn)
@@ -33,9 +52,14 @@ public class Chat extends Activity {
 	
 	public void onClick_SendButton(View v)
 	{
+		if(suaVez){
 		Log.i(TAG, "tentativa de enviar mensagem");
 		EditText editText = (EditText) findViewById(R.id.edit_text);
 		MinhasCoisas.getCliente().write(editText.getText().toString());
+		}else
+		{
+			MinhasCoisas.Show("Não é sua vez!");
+		}
 	}
 	
 	public void MudarPergunta()

@@ -109,14 +109,6 @@ public class Cliente implements Runnable{
 			
 		}
 		
-		MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				Intent sendRoom = new Intent(MinhasCoisas.getCurrentActivity(), Chat.class);
-				MinhasCoisas.getCurrentActivity().startActivity(sendRoom);
-			}
-		});
-		
 		byte[] bytes = new byte[100];
 		
 		while(connected)
@@ -135,8 +127,9 @@ public class Cliente implements Runnable{
 					catch(Exception e){ }
 				}
                 Log.i(TAG, builder.toString());
-                MinhasCoisas.Show(builder.toString());
-                // work with the message
+                
+                
+                JogoEmSi.get().Handle(builder.toString());
                 
                  
             } catch (IOException e) {
