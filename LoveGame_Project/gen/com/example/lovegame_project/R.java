@@ -22,6 +22,7 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int icone_final_48x48=0x7f020001;
     }
     public static final class id {
         public static final int Button01=0x7f080017;
@@ -32,9 +33,8 @@ public final class R {
         public static final int Sim=0x7f08000d;
         public static final int TextView01=0x7f080014;
         public static final int Voltar=0x7f08000c;
-        public static final int action_settings=0x7f08001b;
+        public static final int action_settings=0x7f08001a;
         public static final int activateBtButton=0x7f08000f;
-        public static final int bt_achievements=0x7f08001a;
         public static final int bt_comecar=0x7f080019;
         public static final int bt_enviarSalvo=0x7f080012;
         public static final int bt_enviar_pergunta=0x7f080018;

@@ -1,14 +1,16 @@
 package com.example.lovegame_project;
 
+import android.widget.Button;
+import android.widget.EditText;;
+
 public class JogoEmSi {
 
 	private static JogoEmSi instance;
 	
-	private boolean meuTurno;
 	private int pontos;
-	private String pergunta;
 	private int rodada = 1;
 	
+	private String pergunta;
 	private String[] pecas;
 	
 	private JogoEmSi() {
@@ -32,5 +34,6 @@ public class JogoEmSi {
 	public void Handle(String mensagem)
 	{
 		// handle the message
+		MinhasCoisas.Show(mensagem);
 	}
 }

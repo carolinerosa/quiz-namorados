@@ -18,41 +18,31 @@
         android:text="Love Game" />
 
     <Button
-        android:id="@+id/Button01"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_enviar_pergunta"
-        android:layout_below="@+id/bt_enviar_pergunta"
-        android:layout_marginTop="15dp"
-        android:text="Instruções" />
-
-    <Button
-        android:id="@+id/bt_comecar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_achievements"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="58dp"
-        android:text="Jogar" />
-
-    <Button
         android:id="@+id/bt_enviar_pergunta"
-        android:onClick="click_enviar_pergunta" 
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_achievements"
+        android:layout_below="@+id/bt_comecar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
+        android:onClick="click_enviar_pergunta"
         android:text="Envie sua pergunta" />
 
     <Button
-        android:id="@+id/bt_achievements"
-        android:onClick="click_Achievements" 
-        android:layout_width="fill_parent"
+        android:id="@+id/bt_comecar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_enviar_pergunta"
-        android:layout_below="@+id/bt_comecar"
-        android:layout_marginTop="18dp"
-        android:text="Achievements" />
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="Jogar" />
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_enviar_pergunta"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="Instruções" />
 
 </RelativeLayout>
