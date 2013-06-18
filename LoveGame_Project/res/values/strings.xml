@@ -25,7 +25,9 @@
     <string name="title_activity_chat">Chat</string>
 
     <!-- Chat Activity -->
-    <string name="send_button"> Send </string>
+    <string name="send_button"> Enviar </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_creditos">Creditos</string>
+    <string name="title_activity_instrucoes">Instrucoes</string>
 
 </resources>

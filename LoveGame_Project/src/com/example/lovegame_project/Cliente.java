@@ -145,7 +145,6 @@ public class Cliente implements Runnable{
          connected = false;
     }
 	 
-	 
      public void write(String message) {
          try {
         	 byte[] b = message.getBytes();
