@@ -1,18 +1,17 @@
 package com.example.lovegame_project;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.Toast;
-import android.content.*;
-import android.content.pm.ActivityInfo;
 
 public class Menu_main extends Activity {
 
@@ -32,16 +31,20 @@ public class Menu_main extends Activity {
 		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 		 
-		Button	btcomecar = (Button)findViewById (R.id.bt_comecar);
-		Button btinstrucoes = (Button)findViewById (R.id.bt_comecar);
-		Button btcreditos = (Button)findViewById (R.id.bt_comecar);
+		ImageButton	btcomecar = (ImageButton)findViewById (R.id.bt_comecar);
+		ImageButton btinstrucoes = (ImageButton)findViewById (R.id.bt_instrucoes);
+		ImageButton btcreditos = (ImageButton)findViewById (R.id.bt_creditos);
 		
+		btcomecar.layout(200, 100, 400, 250);
 		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				try{
+					
+					SoundManager.getInstance().playSound(R.raw.test_sound);
+					
 					if(btAdapter != null)
 					{
 						MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");
@@ -68,6 +71,16 @@ public class Menu_main extends Activity {
 			}	
 			});
 		
+	}
+	public void click_Creditos(View v)
+	{
+		ChangeLayout.getInstance().changeLayout(Menu_main.this,Creditos.class);
+
+	}
+	public void click_Instrucoes(View v)
+	{
+		ChangeLayout.getInstance().changeLayout(Menu_main.this,Instrucoes.class);
+
 	}
 	public void click_Achievements(View v)
 	{
