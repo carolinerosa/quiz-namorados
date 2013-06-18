@@ -35,7 +35,9 @@ public class Menu_main extends Activity {
 		ImageButton btinstrucoes = (ImageButton)findViewById (R.id.bt_instrucoes);
 		ImageButton btcreditos = (ImageButton)findViewById (R.id.bt_creditos);
 		
-		btcomecar.layout(200, 100, 400, 250);
+		//btcomecar.layout(200, 100, 400, 250);
+		
+		
 		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
@@ -110,6 +112,15 @@ public class Menu_main extends Activity {
 		}
 	}
 	
+	
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		try{
+		this.btAdapter.disable();
+		}catch(Exception e){}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

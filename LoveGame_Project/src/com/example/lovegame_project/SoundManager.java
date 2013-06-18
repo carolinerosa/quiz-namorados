@@ -33,7 +33,10 @@ public class SoundManager {
 
 	public void playSound(final int source)
 	{
-		MediaPlayer mp = MediaPlayer.create(MinhasCoisas.getCurrentActivity(), source);
+		
+		final MediaPlayer mp = MediaPlayer.create(MinhasCoisas.getCurrentActivity(), source);
+		mp.setVolume(100, 100);
+		
 		try{
 			mp.prepare();
 			mp.start();

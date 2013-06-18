@@ -33,10 +33,22 @@ public class DeviceList extends Activity {
 	private static final int ENABLE_BT_REQUEST = 1;
 	private static final int HANDLER_DEVICES_THREAD = 1;
 
+	private boolean canUpdate = true;
+
 	private BluetoothAdapter btAdapter;
 
 	private ListView pairedDevicesList;
 	private ListView newDevicesList;
+
+	public ListView getNewDevicesList()
+	{
+		return this.newDevicesList;
+	}
+	public ListView getPairedDevicesList()
+	{
+		return this.pairedDevicesList;
+	}
+
 	private ArrayList<String> pairedDevicesData;
 	private ArrayList<String> newDevicesData;
 
@@ -49,9 +61,11 @@ public class DeviceList extends Activity {
 	private Handler handler;
 
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
@@ -77,7 +91,6 @@ public class DeviceList extends Activity {
 		discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60);
 
 		startActivity(discoverableIntent);
-
 
 		BluetoothConnectionManager btManager = new BluetoothConnectionManager(getApplicationContext()); 
 
@@ -113,10 +126,17 @@ public class DeviceList extends Activity {
 				String action = intent.getAction();
 
 				if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+					// Desliga a list view para a atualizar
+					((DeviceList)MinhasCoisas.getCurrentActivity()).getNewDevicesList().setEnabled(false);
+					((DeviceList)MinhasCoisas.getCurrentActivity()).canUpdate = false;
+					// Atualiza
 					BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 					newDevicesData.add(device.getName() + "\n" + device.getAddress());
 					newDevices.add(device);
 					Log.i("Bluetooth Scan", "+1 dispositivo pareado");
+					// Religa a list view
+					((DeviceList)MinhasCoisas.getCurrentActivity()).canUpdate = true;
+					((DeviceList)MinhasCoisas.getCurrentActivity()).getNewDevicesList().setEnabled(true);
 
 				}
 			}
@@ -130,7 +150,7 @@ public class DeviceList extends Activity {
 
 				if(msg.what == HANDLER_DEVICES_THREAD)
 				{
-					AtualizarNewDevicesList();
+					((DeviceList) MinhasCoisas.getCurrentActivity()).AtualizarNewDevicesList();
 				}
 
 				super.handleMessage(msg);
@@ -141,7 +161,9 @@ public class DeviceList extends Activity {
 
 	public void AtualizarNewDevicesList()
 	{
-		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
+		if(this.canUpdate){
+			this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
+		}
 		Log.i(TAG, "Atualizou a lista de device");
 	}
 
@@ -155,61 +177,65 @@ public class DeviceList extends Activity {
 
 		if(!btAdapter.isEnabled()){
 
+			MinhasCoisas.Show("Por favor, ligue o bluetooth");
 			Intent enableBt = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableBt, REQUEST.REQUEST_ENABLE_BT);
-		}
-		this.btAdapter.startDiscovery();
+		}else{
+			this.btAdapter.startDiscovery();
 
-		// +++ Dispositivos escaneados +++
-		IntentFilter foundDevices = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-		registerReceiver(mBroadcastReceiver, foundDevices); // Não esquecer de desregistrar antes de destruir
+			// +++ Dispositivos escaneados +++
+			IntentFilter foundDevices = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+			registerReceiver(mBroadcastReceiver, foundDevices); // Não esquecer de desregistrar antes de destruir
 
-		// +++ Dispositivos já pareados +++
-		Set<BluetoothDevice> alreadyDevices = btAdapter.getBondedDevices();
-		if (alreadyDevices.size() > 0) {
+			// +++ Dispositivos já pareados +++
+			Set<BluetoothDevice> alreadyDevices = btAdapter.getBondedDevices();
+			if (alreadyDevices.size() > 0) {
 
-			for (BluetoothDevice device : alreadyDevices) {
-				pairedDevicesData.add(device.getName() + "\n" + device.getAddress());
-				pairedDevices.add(device);
+				for (BluetoothDevice device : alreadyDevices) {
+					pairedDevicesData.add(device.getName() + "\n" + device.getAddress());
+					pairedDevices.add(device);
 
-			}
-		}
-		MinhasCoisas.Show( String.valueOf(pairedDevicesData.size()));
-		pairedDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list , this.pairedDevicesData));
-		MinhasCoisas.Show("terminou");
-
-		this.IsBroadcastReceiverRunning = true;
-		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
-
-		Thread thread = new Thread(new Runnable()
-		{
-			@Override
-			public void run() {
-				float cronometro = 0;
-				float searchTime = 10;
-				float updateInterval = 2;
-				float updateTime = updateInterval;
-				while(cronometro <= searchTime)
-				{
-					cronometro += TimeManager.getInstance().getDeltaTime()/1000;
-
-					Log.i(TAG, String.valueOf(cronometro));
-
-					if(cronometro >= updateTime)
-					{
-						updateTime += updateInterval;
-						Message msg = new Message();
-						msg.what = HANDLER_DEVICES_THREAD;
-						handler.sendMessage(msg);
-					}
 				}
-
-
 			}
-		});
-		thread.start();
+			MinhasCoisas.Show( String.valueOf(pairedDevicesData.size()));
+
+			pairedDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list , this.pairedDevicesData));
+
+			//MinhasCoisas.Show("terminou");
+
+			this.IsBroadcastReceiverRunning = true;
+
+			this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, this.newDevicesData));
+
+			Thread thread = new Thread(new Runnable()
+			{
+				@Override
+				public void run() {
+					float cronometro = 0;
+					float searchTime = 10;
+					float updateInterval = 2;
+					float updateTime = updateInterval;
+					while(cronometro <= searchTime)
+					{
+						cronometro += TimeManager.getInstance().getDeltaTime()/1000;
+
+						Log.i(TAG, String.valueOf(cronometro));
+
+						if(cronometro >= updateTime)
+						{
+							updateTime += updateInterval;
+							Message msg = new Message();
+							msg.what = HANDLER_DEVICES_THREAD;
+							handler.sendMessage(msg);
+						}
+					}
 
 
+				}
+			});
+			thread.start();
+
+		}
 	}
 
 	private void verificarEstadoBluetooth(){
@@ -267,6 +293,8 @@ public class DeviceList extends Activity {
 	public void onDestroy()
 	{
 		super.onDestroy();
+
+		this.btAdapter.disable();
 
 		if(btAdapter.isDiscovering())
 			btAdapter.cancelDiscovery();
