@@ -1,5 +1,10 @@
 package com.example.lovegame_project;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -30,7 +35,7 @@ public class Menu_main extends Activity {
 		MinhasCoisas.setCurrentActivity(this);
 		setContentView(R.layout.activity_menumain);
 
-		MinhasCoisas.setGameFonte(Typeface.createFromAsset(getAssets(),"fonts/fonte.TTF"));
+		//MinhasCoisas.setGameFonte(Typeface.createFromAsset(getAssets(),"fonts/fonte.TTF"));
 		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -39,6 +44,8 @@ public class Menu_main extends Activity {
 		ImageButton btinstrucoes = (ImageButton)findViewById (R.id.bt_instrucoes);
 		ImageButton btcreditos = (ImageButton)findViewById (R.id.bt_creditos);
 
+		MinhasCoisas.Show("Bem vindo");
+		PegarPergunta();
 		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
@@ -84,6 +91,37 @@ public class Menu_main extends Activity {
 	{
 		ChangeLayout.getInstance().changeLayout(Menu_main.this,Instrucoes.class);
 
+	}
+	public void PegarPergunta()
+	{
+		InputStream is =(getResources().openRawResource(R.raw.mydata));
+		String strContent;
+		
+		BufferedReader bReader = new BufferedReader(new InputStreamReader(is));
+        StringBuffer sbfFileContents = new StringBuffer();
+        String line = null;
+       
+        //read file line by line
+        try {
+			while( (line = bReader.readLine()) != null){
+			        sbfFileContents.append(line);
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+       
+        //finally convert StringBuffer object to String!
+        strContent = sbfFileContents.toString();
+        
+        String jsonString = strContent;
+		
+		mainClass.jp = JsonPut.getInstance();
+		mainClass.jp.declareObject(jsonString);
+		//Resources res = getResources();
+		
+		MinhasCoisas.Show(mainClass.jp.getJson("Pergunta"+2));	
+	
 	}
 	public void click_Achievements(View v)
 	{
