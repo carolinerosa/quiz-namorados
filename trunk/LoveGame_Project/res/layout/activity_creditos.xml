@@ -11,5 +11,4 @@
     android:background="@drawable/credito"
     tools:context=".Creditos" >
 
-
 </RelativeLayout>
