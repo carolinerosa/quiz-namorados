@@ -25,12 +25,14 @@ public final class R {
         public static final int botao_creditos=0x7f020001;
         public static final int botao_instrucoes=0x7f020002;
         public static final int botao_jogar=0x7f020003;
-        public static final int credito=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int icone_final_48x48=0x7f020006;
-        public static final int instrucao=0x7f020007;
-        public static final int pergunta_tela=0x7f020008;
-        public static final int tela_inicio=0x7f020009;
+        public static final int botao_scanear=0x7f020004;
+        public static final int celular_bluetooth=0x7f020005;
+        public static final int credito=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icone_final_48x48=0x7f020008;
+        public static final int instrucao=0x7f020009;
+        public static final int pergunta_tela=0x7f02000a;
+        public static final int tela_inicio=0x7f02000b;
     }
     public static final class id {
         public static final int Nao=0x7f090011;
@@ -88,7 +90,8 @@ public final class R {
         public static final int menu_main=0x7f080008;
     }
     public static final class raw {
-        public static final int test_sound=0x7f040000;
+        public static final int mydata=0x7f040000;
+        public static final int test_sound=0x7f040001;
     }
     public static final class string {
         public static final int NewDevices=0x7f06000c;
