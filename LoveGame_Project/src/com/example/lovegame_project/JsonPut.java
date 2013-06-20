@@ -1,7 +1,10 @@
+package com.example.lovegame_project;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Iterator;
 
@@ -14,7 +17,9 @@ public class JsonPut
 {
 	private static JsonPut instance;
 	JsonObject obj = new JsonObject();
-
+	JsonObject jsonObject;
+	
+	private String message;
 	private JsonPut()
 	{
 
@@ -29,30 +34,20 @@ public class JsonPut
 	}
 	
 	
-	
-	public void getJson(String key)
+	public void declareObject(String value)
 	{
 		JsonParser parser = new JsonParser();
-		 
-		try 
-		{
-	 
-			Object obj = parser.parse(new FileReader("JsonFiles/myData.json"));
-	 
-			JsonObject jsonObject = (JsonObject) obj;
-
-			String message = jsonObject.get(key).toString();
-			System.out.println(message);
-		}
+		Object obj = parser.parse(value);
+		jsonObject = (JsonObject) obj;
+	}
+	
+	public String getJson(String key)
+	{
 		
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		} 
+		message = this.jsonObject.get(key).toString();
+			System.out.println(message);			
+		
+		return message;
 		
 	}
 	
