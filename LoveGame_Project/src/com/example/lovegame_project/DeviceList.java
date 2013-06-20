@@ -77,7 +77,6 @@ public class DeviceList extends Activity {
 
 		startActivity(discoverableIntent);
 
-
 		BluetoothConnectionManager btManager = new BluetoothConnectionManager(getApplicationContext()); 
 
 		// Select device on Paired List View
