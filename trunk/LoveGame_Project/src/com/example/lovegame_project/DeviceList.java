@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -65,9 +67,6 @@ public class DeviceList extends Activity {
 
 		this.pairedDevicesData = new ArrayList<String>();
 		this.newDevicesData = new ArrayList<String>();
-		
-		newDevicesData.add("Falso 1");
-		newDevicesData.add("Falso 2");
 
 		pairedDevices = new ArrayList<BluetoothDevice>();  
 		newDevices = new ArrayList<BluetoothDevice>();
@@ -81,30 +80,30 @@ public class DeviceList extends Activity {
 
 		BluetoothConnectionManager btManager = new BluetoothConnectionManager(getApplicationContext()); 
 
-//		// Select device on Paired List View
-//		this.pairedDevicesList.setOnItemClickListener(new OnItemClickListener() {
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//
-//				MinhasCoisas.Show("Aguarde para entrar no chat.");
-//				Cliente cliente = new Cliente(pairedDevices.get(position), getApplicationContext(), true);
-//				MinhasCoisas.setCliente(cliente);
-//
-//			}
-//		});
+		// Select device on Paired List View
+		this.pairedDevicesList.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				MinhasCoisas.Show("Aguarde para entrar no chat.");
+				Cliente cliente = new Cliente(pairedDevices.get(position), getApplicationContext(), true);
+				MinhasCoisas.setCliente(cliente);
+
+			}
+		});
 
 		// Select device on New List View
-//		this.newDevicesList.setOnItemClickListener(new OnItemClickListener() {
-//			public void onItemClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//
-//				MinhasCoisas.Show("Aguarde para começar o jogo.");
-//				Cliente cliente = new Cliente(newDevices.get(position), getApplicationContext(), true);
-//				MinhasCoisas.setCliente(cliente);
-//
-//
-//			}
-//		});
+		this.newDevicesList.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				MinhasCoisas.Show("Aguarde para começar o jogo.");
+				Cliente cliente = new Cliente(newDevices.get(position), getApplicationContext(), true);
+				MinhasCoisas.setCliente(cliente);
+
+
+			}
+		});
 
 		mBroadcastReceiver = new BroadcastReceiver() {
 
