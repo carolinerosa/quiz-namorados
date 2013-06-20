@@ -46,13 +46,10 @@
         android:id="@+id/edit_resposta"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignBaseline="@+id/pergunta"
-        android:layout_alignBottom="@+id/pergunta"
+        android:layout_alignBaseline="@+id/resposta"
+        android:layout_alignBottom="@+id/resposta"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="text" />
 
 </RelativeLayout>
