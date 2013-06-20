@@ -4,57 +4,58 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Menu_main extends Activity {
 
 	BluetoothAdapter btAdapter;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 		MinhasCoisas.setCurrentActivity(this);
 		setContentView(R.layout.activity_menumain);
+
+		MinhasCoisas.setGameFonte(Typeface.createFromAsset(getAssets(),"fonts/fonte.TTF"));
 		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
-		 
+
+
 		ImageButton	btcomecar = (ImageButton)findViewById (R.id.bt_comecar);
 		ImageButton btinstrucoes = (ImageButton)findViewById (R.id.bt_instrucoes);
 		ImageButton btcreditos = (ImageButton)findViewById (R.id.bt_creditos);
-		
-		//btcomecar.layout(200, 100, 400, 250);
-		
-		
+
 		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				try{
-					
-					SoundManager.getInstance().playSound(R.raw.test_sound);
-					
+
+					SoundManager.getInstance().playSound(R.raw.test_sound, "Teste");
+
 					if(btAdapter != null)
 					{
-						MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");
-						
+						//MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");
+
 						if (!btAdapter.isEnabled()) {
-							
-						    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-						    startActivityForResult(enableBtIntent, REQUEST.REQUEST_ENABLE_BT);
+
+							Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+							startActivityForResult(enableBtIntent, REQUEST.REQUEST_ENABLE_BT);
 						}else
 						{
 							// Change Activity
@@ -65,14 +66,14 @@ public class Menu_main extends Activity {
 					{
 						MinhasCoisas.Show("Este telefone não possui tecnologia Bluetooth");
 					}
-					
+
 				}catch(Exception e)
 				{
 					Mensagem("erro"+e.getMessage());
 				}	
 			}	
-			});
-		
+		});
+
 	}
 	public void click_Creditos(View v)
 	{
@@ -93,32 +94,16 @@ public class Menu_main extends Activity {
 		ChangeLayout.getInstance().changeLayout(Menu_main.this,MandarPergunta.class);
 	}
 	private void Mensagem(String msg) {
-			//apenas informa no rodapé inferior da tela do Android o ocorrido
+		//apenas informa no rodapé inferior da tela do Android o ocorrido
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == RESULT_OK){
-			if(REQUEST.REQUEST_ENABLE_BT == requestCode)
-			{
-				MinhasCoisas.Show("Bluetooth ligado");
-				// Change Activity
-				ChangeLayout.getInstance().changeLayout(Menu_main.this, DeviceList.class);
-			}
-		}else
-		{
-			MinhasCoisas.Show("erro ao tentar ligar Bluetooth");
-		}
-	}
-	
-	
+
 	@Override
 	public void onDestroy()
 	{
 		super.onDestroy();
 		try{
-		this.btAdapter.disable();
+			this.btAdapter.disable();
 		}catch(Exception e){}
 	}
 	@Override

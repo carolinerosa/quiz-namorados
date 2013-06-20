@@ -10,7 +10,8 @@
         android:id="@+id/pairedDevicesTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/listaDePareados" >
+        android:text="@string/listaDePareados"
+         >
     </TextView>
 
     <ListView
@@ -37,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:onClick="onClick_Scan"
+        android:textColor="@android:color/white"
+        android:background="@android:color/background_dark"
         android:text="@string/scanButton" />
 
 </LinearLayout>

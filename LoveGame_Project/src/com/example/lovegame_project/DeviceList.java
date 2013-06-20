@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,14 +23,18 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DeviceList extends Activity {
 
 	private static final String TAG = "DEVICE LIST";
 	private static final int ENABLE_BT_REQUEST = 1;
 	private static final int HANDLER_DEVICES_THREAD = 1;
-
+	
+	private static boolean isAskingDiscoverable = false;
+	
 	private BluetoothAdapter btAdapter;
 
 	private ListView pairedDevicesList;
@@ -62,15 +67,23 @@ public class DeviceList extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
+		
 		setContentView(R.layout.activity_device_list);
+
+		// Só pode-se mudar a fonte de uma view depois de setContentView
+		//TextView t = (TextView)findViewById(R.id.pairedDevicesTittle);
+		//t.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/fonte.TTF"));
+		
+		Button b = (Button)findViewById(R.id.button_scan);
+		b.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/fonte.TTF"));
+		
 		MinhasCoisas.setCurrentActivity(this);
 
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -84,7 +97,7 @@ public class DeviceList extends Activity {
 		pairedDevices = new ArrayList<BluetoothDevice>();  
 		newDevices = new ArrayList<BluetoothDevice>();
 
-		if(this.discoverableIntent == null){
+		if(this.discoverableIntent == null ){
 			this.discoverableIntent = new
 					Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 			discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 360);
@@ -236,6 +249,7 @@ public class DeviceList extends Activity {
 
 		}
 	}
+
 
 	@Override
 	public void onDestroy()

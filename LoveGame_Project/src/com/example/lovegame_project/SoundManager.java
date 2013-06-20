@@ -1,5 +1,7 @@
 package com.example.lovegame_project;
 
+import java.util.HashMap;
+
 import javax.xml.transform.Source;
 
 import android.R.raw;
@@ -13,13 +15,14 @@ public class SoundManager {
 
 	private String TAG = "Sound Manager";
 	
-	private MediaPlayer mediaPlayer;
 	private AudioManager audioManager;
 	
+	private HashMap<String, MediaPlayer> songs;
 	private static SoundManager instance;
 	
 	private SoundManager() {
 		audioManager = (AudioManager)MinhasCoisas.getCurrentActivity().getSystemService(Context.AUDIO_SERVICE);
+		this.songs = new HashMap<String, MediaPlayer>();
 	}
 	public static SoundManager getInstance()
 	{
@@ -31,42 +34,33 @@ public class SoundManager {
 		return instance;
 	}
 
-	public void playSound(final int source)
+	public void playSound(final int source, String name)
 	{
 		
 		final MediaPlayer mp = MediaPlayer.create(MinhasCoisas.getCurrentActivity(), source);
-		mp.setVolume(100, 100);
 		
 		try{
-			mp.prepare();
+			mp.setLooping(true);
 			mp.start();
-			
-			
+			this.songs.put(name, mp);
 		}catch(Exception e)
 		{
 			mp.stop();
 			Log.i(TAG, "Erro no som"); 
 		}
-		
-//		Thread thread = new Thread(new Runnable()
-//		{
-//			@Override
-//			public void run() {
-//				
-//				MediaPlayer mp = MediaPlayer.create(MinhasCoisas.getCurrentActivity(), source);
-//				try{
-//					mp.prepare();
-//					mp.start();
-//					
-//					
-//				}catch(Exception e)
-//				{
-//					mp.stop();
-//					Log.i(TAG, "Erro no som"); 
-//				}
-//				
-//			}
-//		});
-//		thread.start();
 	}
+	public void StopSong(String name)
+	{
+		try{
+		this.songs.get(name).stop();
+		}catch(Exception e)
+		{
+			
+		}
+	}
+	public void StopAllSongs()
+	{
+
+	}
+	
 }
