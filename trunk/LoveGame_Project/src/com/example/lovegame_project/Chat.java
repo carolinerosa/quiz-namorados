@@ -23,7 +23,7 @@ public class Chat extends Activity {
 	private TextView textv_pergunta;
 	private TextView textv_resposta;
 	
-
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,9 @@ public class Chat extends Activity {
 		this.textv_pergunta = (TextView)findViewById(R.id.pergunta);
 		this.textv_resposta = (TextView)findViewById(R.id.resposta);
 		
+		//this.edit_resposta.setEnabled(false);
 		
+		//ChangeInterface(JogoEmSi.get().getTurn());
 		
 		setContentView(R.layout.activity_chat);
 		MinhasCoisas.setCurrentActivity(this);
@@ -65,7 +67,8 @@ public class Chat extends Activity {
 	{
 		Log.i(TAG, "tentativa de enviar mensagem");
 		EditText editText = (EditText) findViewById(R.id.edit_resposta);
-		//MinhasCoisas.getCliente().write(editText.getText().toString());
+		
+		
 		JogoEmSi.get().Send(editText.getText().toString());
 	}
 

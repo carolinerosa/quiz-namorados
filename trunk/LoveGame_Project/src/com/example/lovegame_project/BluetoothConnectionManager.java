@@ -57,12 +57,16 @@ public class BluetoothConnectionManager implements Runnable{
 	@Override
 	public void run() {
 		try {
+			
 			btSocket = mBtServerSocket.accept();
 			
 			Log.i(TAG, "Aceitou uma nova conexão");
+			MinhasCoisas.Show("Aceitou uma nova conexão.");
+			
 		} catch (IOException e) {
 			
 			Log.i(TAG, "Erro ao tentar receber socket de conexão");
+			MinhasCoisas.Show("Erro ao aceitar conexão. Tente novamente");
 			e.printStackTrace();
 		} 
 			
@@ -70,9 +74,10 @@ public class BluetoothConnectionManager implements Runnable{
 		{
 			
 			Cliente cs = new Cliente(btSocket, false);
+			MinhasCoisas.setCliente(cs);
 			// Configuramos o primeiro a responder
-			JogoEmSi.get().setTurn(true);
 			
+			JogoEmSi.get().setTurn(true);
 			try {
 				mBtServerSocket.close();
 				
@@ -86,6 +91,7 @@ public class BluetoothConnectionManager implements Runnable{
 	
 	public static void Cancel()
 	{
+		
 		alive = false;
 	}
 }

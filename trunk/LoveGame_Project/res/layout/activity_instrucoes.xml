@@ -6,9 +6,8 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:scrollbarAlwaysDrawVerticalTrack="false"
     tools:context=".Instrucoes" >
-    
-        
         
         <LinearLayout
          android:background="@drawable/instrucao"

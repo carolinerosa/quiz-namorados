@@ -1,12 +1,14 @@
 package com.example.lovegame_project;
 
+import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class JogoEmSi {
 
 	private static JogoEmSi instance;
-	
+	private String TAG = "Jogo em Si";
 	private int pontos;
 	private int rodada = 1;
 	
@@ -14,7 +16,6 @@ public class JogoEmSi {
 	private String[] pecas;
 	
 	private boolean turn = false;
-	
 	
 	public boolean getTurn()
 	{
@@ -39,6 +40,7 @@ public class JogoEmSi {
 	
 	public void Send(String mensagem)
 	{
+		
 		try{
 		if(this.turn){
 			MinhasCoisas.getCliente().write(mensagem);
@@ -49,7 +51,8 @@ public class JogoEmSi {
 		}
 		}catch(Exception e)
 		{
-			MinhasCoisas.Show("Desculpas. Devido a força centrípeta da lua em rotação à estrela H12KL7, ocorreu um erro na transferência de dados. Tente novamente.");
+			Log.i(TAG, "Erro", e);
+			MinhasCoisas.Show("Desculpas. Tente novamente.");
 		}
 	}
 	
@@ -58,7 +61,6 @@ public class JogoEmSi {
 		// handle the message
 		MinhasCoisas.Show(mensagem);
 		this.turn = !turn;
-		
 		MinhasCoisas.Show(String.valueOf(this.turn));
 	}
 }

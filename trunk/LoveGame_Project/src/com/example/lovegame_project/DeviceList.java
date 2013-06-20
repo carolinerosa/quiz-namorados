@@ -45,12 +45,25 @@ public class DeviceList extends Activity {
 	private BroadcastReceiver mBroadcastReceiver;
 	private Handler handler;
 
+	private BluetoothConnectionManager btManager;
+
+	private Intent discoverableIntent;
+
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+
+		this.newDevicesData.clear();
+
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
+
+
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
@@ -71,20 +84,24 @@ public class DeviceList extends Activity {
 		pairedDevices = new ArrayList<BluetoothDevice>();  
 		newDevices = new ArrayList<BluetoothDevice>();
 
-		Intent discoverableIntent = new
-				Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-		discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60);
+		if(this.discoverableIntent == null){
+			this.discoverableIntent = new
+					Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+			discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 360);
 
-		startActivity(discoverableIntent);
+			startActivity(discoverableIntent);
+		}
 
-		BluetoothConnectionManager btManager = new BluetoothConnectionManager(getApplicationContext()); 
+		if(btManager == null){
+			btManager = new BluetoothConnectionManager(getApplicationContext()); 
+		}
 
 		// Select device on Paired List View
 		this.pairedDevicesList.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				MinhasCoisas.Show("Aguarde para entrar no chat.");
+				MinhasCoisas.Show("Aguarde para entrar no jogo");
 				Cliente cliente = new Cliente(pairedDevices.get(position), getApplicationContext(), true);
 				MinhasCoisas.setCliente(cliente);
 
@@ -96,7 +113,7 @@ public class DeviceList extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				MinhasCoisas.Show("Aguarde para começar o jogo.");
+				MinhasCoisas.Show("Aguarde para entrar no jogo.");
 				Cliente cliente = new Cliente(newDevices.get(position), getApplicationContext(), true);
 				MinhasCoisas.setCliente(cliente);
 
@@ -114,7 +131,6 @@ public class DeviceList extends Activity {
 					BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 					newDevicesData.add(device.getName() + "\n" + device.getAddress());
 					newDevices.add(device);
-					MinhasCoisas.Show("Achou um dispositivo");
 					AtualizarNewDevicesList();
 					Log.i("Bluetooth Scan", "+1 dispositivo pareado");
 
@@ -130,9 +146,9 @@ public class DeviceList extends Activity {
 
 				if(msg.what == HANDLER_DEVICES_THREAD)
 				{
-					
+
 					//AtualizarNewDevicesList();
-					
+
 				}
 
 				super.handleMessage(msg);
@@ -146,7 +162,7 @@ public class DeviceList extends Activity {
 		ArrayList<String> tmpNewDevicesData = new ArrayList<String>();
 		tmpNewDevicesData.addAll(newDevicesData);
 		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, tmpNewDevicesData));
-		
+
 		Log.i(TAG, "Atualizou a lista de device");
 	}
 
@@ -156,117 +172,69 @@ public class DeviceList extends Activity {
 	}
 	private void Scan()
 	{
-		this.pairedDevicesData.clear();
-
 		if(!btAdapter.isEnabled()){
 
 			Intent enableBt = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableBt, REQUEST.REQUEST_ENABLE_BT);
-		}
-		this.btAdapter.startDiscovery();
+		}else{
 
-		// +++ Dispositivos escaneados +++
-		IntentFilter foundDevices = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-		registerReceiver(mBroadcastReceiver, foundDevices); // Não esquecer de desregistrar antes de destruir
+			//Começa a escanear novos dispositivos 
+			if(!this.btAdapter.isDiscovering())
+				this.btAdapter.startDiscovery();
 
-		this.IsBroadcastReceiverRunning = true;
-		
-		// +++ Dispositivos já pareados +++
-		Set<BluetoothDevice> alreadyDevices = btAdapter.getBondedDevices();
-		if (alreadyDevices.size() > 0) {
-
-			for (BluetoothDevice device : alreadyDevices) {
-				pairedDevicesData.add(device.getName() + "\n" + device.getAddress());
-				pairedDevices.add(device);
-
+			// +++ Dispositivos escaneados +++
+			if(!this.IsBroadcastReceiverRunning){
+				IntentFilter foundDevices = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+				registerReceiver(mBroadcastReceiver, foundDevices); // Não esquecer de desregistrar antes de destruir
+				this.IsBroadcastReceiverRunning = true;
 			}
-		}
-		MinhasCoisas.Show( String.valueOf(pairedDevicesData.size()));
-		pairedDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list , this.pairedDevicesData));
-		MinhasCoisas.Show("terminou");
 
-		ArrayList<String> tmpNewDevicesData = new ArrayList<String>();
-		tmpNewDevicesData.addAll(newDevicesData);
-		this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, tmpNewDevicesData));
+			// +++ Dispositivos já pareados +++
+			Set<BluetoothDevice> alreadyDevices = btAdapter.getBondedDevices();
+			if (alreadyDevices.size() > 0) {
 
-		Thread thread = new Thread(new Runnable()
-		{
-			@Override
-			public void run() {
-				float cronometro = 0;
-				float searchTime = 10;
-				float updateInterval = 2;
-				float updateTime = updateInterval;
-				while(cronometro <= searchTime)
-				{
-					cronometro += TimeManager.getInstance().getDeltaTime()/1000;
+				this.pairedDevicesData.clear();
+				for (BluetoothDevice device : alreadyDevices) {
+					pairedDevicesData.add(device.getName() + "\n" + device.getAddress());
+					pairedDevices.add(device);
 
-					Log.i(TAG, String.valueOf(cronometro));
-
-					if(cronometro >= updateTime)
-					{
-						updateTime += updateInterval;
-						Message msg = new Message();
-						msg.what = HANDLER_DEVICES_THREAD;
-						handler.sendMessage(msg);
-					}
 				}
 			}
-		});
-		thread.start();
 
+			// Põe os nomes dos dispositivos pareados na ListView de dispositivos pareados
+			pairedDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list , this.pairedDevicesData));
 
-	}
+			ArrayList<String> tmpNewDevicesData = new ArrayList<String>();
+			tmpNewDevicesData.addAll(newDevicesData);
+			this.newDevicesList.setAdapter(new ArrayAdapter<String>(this, R.layout.list, tmpNewDevicesData));
 
-	private void verificarEstadoBluetooth(){
-		//	
-		//	    Bluetooth State
-		//		bluetoothState = new BroadcastReceiver()
-		//		{
-		//			@Override
-		//			public void onReceive(Context context, Intent intent) {
-		//				String action = intent.getAction();
-		//				if(BluetoothAdapter.ACTION_STATE_CHANGED.equals(action))
-		//				{
-		//					int btState = intent.getParcelableExtra(BluetoothAdapter.EXTRA_STATE);
-		//					switch(btState)
-		//					{
-		//					case BluetoothAdapter.STATE_CONNECTING:
-		//						//ShowMessage("conectando");
-		//						Log.i("Bluetooth Prototype", "Connecting");
-		//						break;
-		//					case BluetoothAdapter.STATE_CONNECTED:
-		//						//ShowMessage("Conectado");
-		//						Log.i("Bluetooth Prototype", "Connected");
-		//						break;
-		//						
-		//					case BluetoothAdapter.STATE_TURNING_ON:
-		//						//ShowMessage("Conectando...");
-		//						
-		//						Log.i("Bluetooth Prototype", "Turning Bluetooth on");
-		//						break;
-		//					case BluetoothAdapter.STATE_ON:
-		//						//ShowMessage("Conectado");
-		//						Log.i("Bluetooth Prototype", "Bluetooth in on");
-		//						break;
-		//					case BluetoothAdapter.STATE_TURNING_OFF:
-		//						//ShowMessage("Desconectando");
-		//						Log.i("Bluetooth Prototype", "Turning Bluetooth off");
-		//						break;
-		//					case BluetoothAdapter.STATE_OFF:
-		//						//ShowMessage("Desconectado");
-		//						Log.i("Bluetooth Prototype", "Bluetooth is off");
-		//						break;
-		//					}
-		//				}
-		//				
-		//			}
-		//			
-		//			
-		//		};
-		//		
-		//		IntentFilter bluetoothStateFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-		//		registerReceiver(bluetoothState, bluetoothStateFilter); // Don't forget to unregister during onDestroy
+			//			Thread thread = new Thread(new Runnable()
+			//			{
+			//				@Override
+			//				public void run() {
+			//					float cronometro = 0;
+			//					float searchTime = 10;
+			//					float updateInterval = 2;
+			//					float updateTime = updateInterval;
+			//					while(cronometro <= searchTime)
+			//					{
+			//						cronometro += TimeManager.getInstance().getDeltaTime()/1000;
+			//
+			//						Log.i(TAG, String.valueOf(cronometro));
+			//
+			//						if(cronometro >= updateTime)
+			//						{
+			//							updateTime += updateInterval;
+			//							Message msg = new Message();
+			//							msg.what = HANDLER_DEVICES_THREAD;
+			//							handler.sendMessage(msg);
+			//						}
+			//					}
+			//				}
+			//			});
+			//			thread.start();
+
+		}
 	}
 
 	@Override
