@@ -17,6 +17,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/botao_creditos"
         android:onClick="click_Creditos"
+     	
         android:text="Créditos" />
 
     <ImageButton

@@ -24,7 +24,6 @@ public class Chat extends Activity {
 	private TextView textv_resposta;
 	
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +39,7 @@ public class Chat extends Activity {
 		this.edit_resposta = (EditText)findViewById( R.id.edit_resposta);
 		this.textv_pergunta = (TextView)findViewById(R.id.pergunta);
 		this.textv_resposta = (TextView)findViewById(R.id.resposta);
+		
 		
 		//this.edit_resposta.setEnabled(false);
 		
